@@ -1,4 +1,4 @@
-# script that reads square grid of Greece and filters only those regions containing beaches (from .GeoJSON file)
+# script that reads square grid of Greece and filters only those regions containing forests (from .GeoJSON file)
 
 import os
 import sys
