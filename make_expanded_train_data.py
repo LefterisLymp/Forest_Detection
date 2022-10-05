@@ -120,7 +120,10 @@ def generate_mask(tile_id, shapes):
         if cnt == 0:
             return None
 
+        #cut the SR image into smaller segments
         for i in range(sf*sf):
+            #check if there is a label for each segment, if yes, create the mask
+            #else, ignore the segment
             if not pixel_polys_dict[i] == []:
                 polyOutputFile = os.path.join(polyOutputDirName, tile_id + '_' + str(i) + '.json')
 
