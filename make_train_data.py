@@ -14,7 +14,7 @@ import rasterio.mask
 from rasterio.plot import reshape_as_image
 from rasterio.features import rasterize
 
-DATA_DIR = '/data/data1/users/lefterislymp/coast_dir/train_data/data_osm'
+DATA_DIR = '/data/data1/users/lefterislymp/forest_dir/train_data/data_osm'
 
 if (len(sys.argv) < 3 or int(sys.argv[1]) not in range(2,851) or sys.argv[2] not in ['tif','png','all']):
     print('Usage: python make_train_data.py m [tif|png|all] \nwhere m is the tile size in km, with 1 < m <= 850')
