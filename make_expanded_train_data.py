@@ -214,7 +214,7 @@ for beach_file in beach_files:
 # merge all of the dataframes into one
 beach_polys = gpd.GeoDataFrame(pd.concat(geodf_list, ignore_index=True))
 
-# create beaches per tile dict
+# create forests per tile dict
 json_dict = {i: [] for i in grid_polys.cell_id}
 for index, beach in beach_polys.iterrows():
     for tile_id in tile_list(beach):
