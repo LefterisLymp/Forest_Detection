@@ -8,8 +8,8 @@ _base_ = [
     '../_base_/default_runtime.py'
 ]
 
-
-DATA_DIR = '/data/data1/users/lefterislymp/coast_dir/resuneta/'
+#change the directory to yours
+DATA_DIR = '/data/data1/users/lefterislymp/forest_dir/train_data/'
 
 norm_cfg = dict(type='SyncBN', requires_grad=True)
 backbone_norm_cfg = dict(type='LN', requires_grad=True)

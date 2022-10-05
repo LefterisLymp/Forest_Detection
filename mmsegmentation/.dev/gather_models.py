@@ -10,7 +10,7 @@ import shutil
 import mmcv
 import torch
 
-# build schedule look-up table to automatically find the final model
+# build schedule look-up table to automatically find the ground_truths model
 RESULTS_LUT = ['mIoU', 'mAcc', 'aAcc']
 
 

@@ -832,7 +832,7 @@ class SegRescale(object):
     """Rescale semantic segmentation maps.
 
     Args:
-        scale_factor (float): The scale factor of the final output.
+        scale_factor (float): The scale factor of the ground_truths output.
     """
 
     def __init__(self, scale_factor=1):

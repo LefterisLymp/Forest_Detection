@@ -14,21 +14,21 @@ from shapely.geometry.polygon import Polygon
 from shapely.geometry import Point
 from shapely.ops import unary_union, cascaded_union, polygonize
 
-train_data_dir = '../all_train_data/2k/train_org/data_tiles_coast'
-train_labels_dir = '../all_train_data/2k/train_org/data_labels_poly'
+#script that creates the dataset into NumPy arrays
+#these directories are for the original images, for the super resolved images change them to the right ones
 
-val_data_dir = '../all_train_data/2k/val_org/data_tiles_coast'
-val_labels_dir = '../all_train_data/2k/val_org/data_labels_poly'
+train_data_dir = '../train_data/2k/train_org/data_tiles_forest'
+train_labels_dir = '../train_data/2k/train_org/data_labels_poly'
 
-test_data_dir = '../all_train_data/2k/test_org/data_tiles_coast'
-test_labels_dir = '../all_train_data/2k/test_org/data_labels_poly'
+val_data_dir = '../train_data/2k/val_org/data_tiles_forest'
+val_labels_dir = '../train_data/2k/val_org/data_labels_poly'
+
+test_data_dir = '../train_data/2k/test_org/data_tiles_forest'
+test_labels_dir = '../train_data/2k/test_org/data_labels_poly'
 
 
 class_map = {
-    "agriculture": 1,
-    "beach": 2,
-    "forest": 3,
-    "residential": 4
+    "forest": 1
 }
 
 """
@@ -37,7 +37,7 @@ class_map = {
 }
 """
 
-logging.basicConfig(filename="beach_info.log",
+logging.basicConfig(filename="forest_info.log",
                     format='%(asctime)s %(message)s',
                     filemode='w')
 logger = logging.getLogger()
@@ -53,8 +53,9 @@ for imageDir, polyDir in zip([train_data_dir, val_data_dir, test_data_dir], [tra
     image_arrays = []
     label_arrays = []
 
-    image_outfile = split_map[split_index] + '_images_org_final.npy'
-    label_outfile = split_map[split_index] + '_labels_org_final.npy'
+    #org is for the original images, change the name to sr for super resolution images
+    image_outfile = split_map[split_index] + '_images_org.npy'
+    label_outfile = split_map[split_index] + '_labels_org.npy'
 
     print('Split:', split_map[split_index])
 
@@ -100,8 +101,6 @@ for imageDir, polyDir in zip([train_data_dir, val_data_dir, test_data_dir], [tra
             polys = json.load(json_file)
             for poly in polys:
                 class_id = poly['class_id']
-                #if class_id != "residential":
-                #    continue
 
                 class_num = class_map[class_id]
 

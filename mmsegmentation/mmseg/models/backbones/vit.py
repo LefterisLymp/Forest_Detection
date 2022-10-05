@@ -158,7 +158,7 @@ class VisionTransformer(BaseModule):
         patch_norm (bool): Whether to add a norm in PatchEmbed Block.
             Default: False.
         final_norm (bool): Whether to add a additional layer to normalize
-            final feature map. Default: False.
+            ground_truths feature map. Default: False.
         interpolate_mode (str): Select the interpolate mode for position
             embeding vector resize. Default: bicubic.
         num_fcs (int): The number of fully-connected layers for FFNs.

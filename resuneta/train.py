@@ -16,13 +16,11 @@ import logging
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras.models import Sequential
-#from tensorflow.keras.layers import Dense, Dropout,Input,Average,Conv2DTranspose,SeparableConv2D,dot,UpSampling2D,Add, Flatten,Concatenate,Multiply,Conv2D, MaxPooling2D,Activation,AveragePooling2D, ZeroPadding2D,GlobalAveragePooling2D,multiply,DepthwiseConv2D,ZeroPadding2D,GlobalAveragePooling2D,BatchNormalization,LeakyReLU
-from tensorflow.keras import backend as K
 from tensorflow.keras.layers import concatenate ,Lambda
 from tensorflow.keras.optimizers import SGD
 from tensorflow.keras.optimizers import Adam,RMSprop
 from tensorflow.keras.losses import BinaryCrossentropy,CategoricalCrossentropy
-from tensorflow.keras.initializers import RandomNormal
+
 from tensorflow.keras.models import Model
 from tensorflow.keras.callbacks import *
 
@@ -52,12 +50,12 @@ config.gpu_options.allow_growth = True
 sess = tf.compat.v1.Session()
 
 print("Loading training data...")
-train_data = np.load('train_images_org_forest.npy')
-train_target = np.load('train_labels_org_forest.npy')
+train_data = np.load('../train_data/train_images_org_forest.npy')
+train_target = np.load('../train_data/train_labels_org_forest.npy')
 
 print("Loading validation data...")
-val_data = np.load('val_images_org_forest.npy')
-val_target = np.load('val_labels_org_forest.npy')
+val_data = np.load('../train_data/val_images_org_forest.npy')
+val_target = np.load('../train_data/val_labels_org_forest.npy')
 
 train_data_resized = []
 train_target_resized = []
@@ -91,7 +89,7 @@ def dice_coef_multilabel(y_true, y_pred, numLabels):
 def eligible_label(arr):
     return np.count_nonzero(arr) > 5250 #>8% of image
 
-
+#Resizing to fit the ResUNet-a
 print("Resizing training data...")
 for ind in tqdm(range(train_data.shape[0])):
     resized = cv2.resize(train_data[ind, :, :, :], dim, interpolation=cv2.INTER_NEAREST)
@@ -194,7 +192,7 @@ class_weights = [1.0, 1.0]
 size = (256, 256)
 
 loss_fn = multiclass_weighted_tanimoto_loss(class_weights)
-bn_loss = BinaryFocalLoss(gamma=0)
+bn_loss = BinaryFocalLoss(gamma=0) #Cross Entropy Loss with gamma = 0
 
 def hybrid_loss(y_true, y_pred):
     loss_focal = losses.focal_tversky(y_true, y_pred, alpha=0.5, gamma=4 / 3)

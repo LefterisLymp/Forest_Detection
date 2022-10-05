@@ -20,7 +20,7 @@ class DepthwiseSeparableFCNHead(FCNHead):
             the result of several consecutive convolution layers.
             Default: True.
         num_classes(int): Used to determine the dimension of
-            final prediction tensor.
+            ground_truths prediction tensor.
         in_index(int): Correspond with 'out_indices' in FastSCNN backbone.
         norm_cfg (dict | None): Config of norm layers.
         align_corners (bool): align_corners argument of F.interpolate.

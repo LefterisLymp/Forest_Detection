@@ -67,7 +67,7 @@ class MAE(BEiT):
         patch_norm (bool): Whether to add a norm in PatchEmbed Block.
             Default: False.
         final_norm (bool): Whether to add a additional layer to normalize
-            final feature map. Default: False.
+            ground_truths feature map. Default: False.
         num_fcs (int): The number of fully-connected layers for FFNs.
             Default: 2.
         norm_eval (bool): Whether to set norm layers to eval mode, namely,
