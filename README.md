@@ -26,6 +26,13 @@ created which comprises of remote sensing images from the Sentinel-2 satellite m
 - The ground truths must accompany the data tiles. To create a dataset with non-resolved images, run extract_forest.py -> make_train_data.py.<br> To create a dataset with super resolved images, run extract_forest.py -> expand_forest_images.py (super-resolution) -> make_expanded_train_data.py -> cut_sr_segment_tiles.py
 - For each dataset, in the <b>train_data</b> directory, run split_files.py (or split_files_sr.py if you have SR images) in order to split the dataset into train, val and test dataset. Then run create_numpy_data.py to transform the dataset into NumPy arrays, in order to train ResUNet-a and DeepLabv3+. Run make_swin_dataset.py to make the dataset compatible with Swin Transformer. Run filtering.py if you wish to filter some of the data. Note that the images and labels are of size $200\times 200$ pixels.
 
+<p align="middle">
+
+  <img src="https://user-images.githubusercontent.com/64773191/194282048-1be65aed-7cbd-4fe7-85fe-825b798487c8.png" width="200" height="200"/>
+  <img src="https://user-images.githubusercontent.com/64773191/194282073-97766e10-c63e-4ca4-8101-806466949ba5.png" width="200" height="200"/>
+
+</p>
+
 ---
 ### Training and Testing
 To train <b>ResUNet-a</b> and <b>DeepLabv3+</b>, run train.py on <b>resuneta</b> and <b>deeplabv3</b> directories respectively. To test them, run test.py. For the <b>Swin Transformer</b> [mmsegmentation](https://github.com/open-mmlab/mmsegmentation) is used. My custom configuration file is [mmsegmentation/configs/swin/my_config.py](https://github.com/LefterisLymp/Forest_Detection/blob/main/mmsegmentation/configs/swin/my_config.py) and I provide custom implemetnations on Hybrid Loss Function (Focal Tversky Loss + IoU Loss) in [mmsegmentation/mmseg/models/losses/hybrid_loss.py](https://github.com/LefterisLymp/Forest_Detection/blob/main/mmsegmentation/mmseg/models/losses/hybrid_loss.py) and Tanimoto Loss in [mmsegmentation/mmseg/models/losses/tanimoto_loss.py](https://github.com/LefterisLymp/Forest_Detection/blob/main/mmsegmentation/mmseg/models/losses/tanimoto_loss.py)
